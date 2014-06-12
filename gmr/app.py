@@ -31,3 +31,5 @@ def createConfig(config):
 	with open(configPath + configName, 'wb') as configFile:
 		config.write(configFile)
 
+if __name__ == '__main__':
+	main()
