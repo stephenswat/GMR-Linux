@@ -6,6 +6,7 @@ class Account:
 	def __init__(self, authKey):
 		self.authKey = authKey
 		self.playerID = gmr_api.authenticateUser(authKey)
+		self.games = []
 
 		if self.playerID == None:
 			raise ValueError("Authentication key did not authenticate.")
@@ -24,4 +25,13 @@ class Account:
 		self.games = []
 
 		for gmrGame in games:
-			self.games.append(game.Game(self, gmrGame))
+			self.games.append(game.Game(gmrGame))
+
+	def getCurrentTurns(self):
+		currentTurns = []
+
+		for gmrGame in self.games:
+			if gmrGame.playerHasTurn(self.playerID):
+				currentTurns.append(gmrGame)
+
+		return currentTurns
