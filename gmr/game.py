@@ -12,5 +12,6 @@ class Game:
 	def playTurn(self, authKey):
 		gameData = gmrapi.getSaveData(authKey, self.gameID)
 
-		fileName = re.sub("[^a-zA-Z\d ]", "", self.name)
+		fileName = re.sub("[^a-zA-Z\d_]", "", self.name)
+		fileName = re.sub(" ", "_", self.name)
 		filemanager.FileManager.saveGame(fileName + ".Civ5Save", gameData)
