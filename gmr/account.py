@@ -1,11 +1,11 @@
 import requests
-from gmrapi import *
-from game import *
+import gmr_api
+import game
 
 class Account:
 	def __init__(self, authKey):
 		self.authKey = authKey
-		self.playerID = authenticateUser(authKey)
+		self.playerID = gmr_api.authenticateUser(authKey)
 
 		if self.playerID == None:
 			raise ValueError("Authentication key did not authenticate.")
@@ -13,7 +13,7 @@ class Account:
 		self.updateAccount()
 
 	def updateAccount(self):
-		response = getGames(self.authKey, self.playerID)
+		response = gmr_api.getGames(self.authKey, self.playerID)
 
 		self.points = response["CurrentTotalPoints"]
 		self.name = response["Players"][0]["PersonaName"]
@@ -23,5 +23,5 @@ class Account:
 	def updateGames(self, games):
 		self.games = []
 
-		for game in games:
-			self.games.append(Game(self, game))
+		for gmrGame in games:
+			self.games.append(game.Game(self, gmrGame))
