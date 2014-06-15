@@ -1,9 +1,9 @@
-import gmr_time
+import gmr_api
 
 class Turn:
 	def __init__(self, turnData):
 		self.turnID       = turnData['TurnId']
-		self.started      = gmr_time.convertTime(turnData['Started'])
+		self.started      = gmr_api.convertTime(turnData['Started'])
 		self.playerID     = turnData['UserId']
 		self.number       = turnData['Number']
 		self.firstTurn    = turnData['IsFirstTurn']
@@ -12,5 +12,5 @@ class Turn:
 		if turnData['Expires'] == None:
 			self.expires = None
 		else:
-			self.expires = gmr_time.convertTime(turnData['Expires'])
+			self.expires = gmr_api.convertTime(turnData['Expires'])
 

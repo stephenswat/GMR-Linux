@@ -1,5 +1,6 @@
 import requests
 import json
+import time
 
 apiUrl = "http://multiplayerrobot.com/api/Diplomacy/"
 
@@ -40,3 +41,7 @@ def __apiQuery(method, arguments, postdata = None, stream = False,
 		return query
 	else:
 		r.raise_for_status()
+
+def convertTime(timeStr):
+	timeStruct = time.strptime(timeStr.split(".")[0], "%Y-%m-%dT%H:%M:%S")
+	return timeStruct
