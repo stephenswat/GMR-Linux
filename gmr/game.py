@@ -16,11 +16,11 @@ class Game:
 	def playTurn(self, authKey):
 		gameData = gmrapi.getSaveData(authKey, self.gameID)
 
-		fileName = re.sub("[^a-zA-Z\d_]", "", self.name)
+		fileName = re.sub("[^a-zA-Z\d_ ]", "", self.name)
 		fileName = re.sub(" ", "_", fileName)
 		filemanager.FileManager.saveGame(fileName + ".Civ5Save", gameData)
 
-		if config.get("StartCiv"):
+		if config.config.getboolean("GMR", "StartCiv"):
 			print "Starting Civ 5..."
 			system("steam -applaunch 8930")
 

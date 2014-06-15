@@ -5,13 +5,13 @@ import config
 
 def main():
 	config.init()
-	
-	userAccount = account.Account(config.get("AuthKey"))
-	filemanager.FileManager.saveDirectory = config.get("SaveDir")
+
+	userAccount = account.Account(config.config.get("GMR", "AuthKey"))
+	filemanager.FileManager.saveDirectory = config.config.get("GMR", "SaveDir")
 
 	print userAccount.games
 	print userAccount.getCurrentTurns()
-	userAccount.getCurrentTurns()[0].playTurn(config.get("AuthKey"))
+	userAccount.getCurrentTurns()[0].playTurn(config.config.get("GMR", "AuthKey"))
 
 if __name__ == '__main__':
 	main()

@@ -4,7 +4,6 @@ import os
 configPath = os.path.expanduser("~") + "/.local/share/gmr-linux/"
 configName = "gmr.conf"
 
-global config 
 config = ConfigParser.ConfigParser()
 
 def init():
@@ -12,9 +11,6 @@ def init():
 		createConfig(config)
 
 	config.read(configPath + configName)
-
-def get(key):
-	return config.get("GMR", key)
 
 def set(key, value):
 	config.set("GMR", key, value)
