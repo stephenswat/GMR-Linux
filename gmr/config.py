@@ -25,6 +25,7 @@ def createConfig(config):
 	config.add_section("GMR")
 	config.set("GMR", "AuthKey", "")
 	config.set("GMR", "SaveDir", os.path.expanduser("~") + "/.local/share/Aspyr/Sid Meier's Civilization 5/Saves/hotseat/")
+	config.set("GMR", "StartCiv", True)
 
 	if not os.path.exists(configPath):
 		os.makedirs(configPath)
