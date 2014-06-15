@@ -19,11 +19,12 @@ def main():
 
 	print userAccount.games
 	print userAccount.getCurrentTurns()
+	userAccount.getCurrentTurns()[0].playTurn(config.get("GMR", "AuthKey"))
 
 def createConfig(config):
 	config.add_section("GMR")
 	config.set("GMR", "AuthKey", "")
-	config.set("GMR", "SaveDir", "~/.local/share/Aspyr/Sid Meier's Civilization 5/Saves/hotseat")
+	config.set("GMR", "SaveDir", os.path.expanduser("~") + "/.local/share/Aspyr/Sid Meier's Civilization 5/Saves/hotseat/")
 
 	if not os.path.exists(configPath):
 		os.makedirs(configPath)
