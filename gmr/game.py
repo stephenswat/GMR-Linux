@@ -17,7 +17,7 @@ class Game:
 		gameData = gmrapi.getSaveData(authKey, self.gameID)
 
 		fileName = re.sub("[^a-zA-Z\d_]", "", self.name)
-		fileName = re.sub(" ", "_", self.name)
+		fileName = re.sub(" ", "_", fileName)
 		filemanager.FileManager.saveGame(fileName + ".Civ5Save", gameData)
 
 		if config.get("StartCiv"):
