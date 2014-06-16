@@ -26,7 +26,21 @@ def getSaveData(authKey, gameID):
 	return response.raw
 
 def submitTurn(authKey, gameID, saveData):
-	arguments = {"authKey": authKey, "gameId": gameID}
+	arguments = {"authKey": authKey, "turnId": gameID}
+
+	url = apiUrl + "SubmitTurn" + "?"
+
+	for arg, val in arguments.items():
+		url += (arg + "=" + str(val) + "&")
+
+	print url
+
+	query = requests.post(url, data=saveData)
+
+	if query.status_code == 200:
+		return query
+	else:
+		query.raise_for_status()
 
 def __apiQuery(method, arguments, postdata = None, stream = False, 
 	payload = False):
@@ -40,7 +54,7 @@ def __apiQuery(method, arguments, postdata = None, stream = False,
 	if query.status_code == 200:
 		return query
 	else:
-		r.raise_for_status()
+		query.raise_for_status()
 
 def convertTime(timeStr):
 	timeStruct = time.strptime(timeStr.split(".")[0], "%Y-%m-%dT%H:%M:%S")
