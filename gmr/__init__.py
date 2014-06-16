@@ -1,5 +1,4 @@
-__all__ = ['account', 'app', 'config', 'filemanager', 'game', 'gamelistener',
-	'gmr_api', 'turn', 'ui']
+__all__ = ['account', 'app', 'config', 'filemanager', 'game', 'gamelistener', 'gmr_api', 'turn', 'ui']
 
 import account
 import filemanager

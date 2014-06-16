@@ -5,6 +5,12 @@ import config
 import time
 
 def main():
+	"""
+	The main function for starting the Giant Multiplayer Robot client for Linux
+	which creates the account and then does some fancy stuff with it. Should
+	call the user interface later.
+	"""
+
 	config.init()
 
 	userAccount = account.Account(config.config.get("GMR", "AuthKey"))
