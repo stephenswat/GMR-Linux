@@ -33,8 +33,9 @@ def createConfig(config):
 	also creates the file.
 	"""
 
+	key = raw_input('Enter your GMR authentication key: ')
 	config.add_section("GMR")
-	config.set("GMR", "AuthKey", "")
+	config.set("GMR", "AuthKey", key)
 	config.set("GMR", "SaveDir", os.path.expanduser("~") + "/.local/share/Aspyr/Sid Meier's Civilization 5/Saves/hotseat/")
 	config.set("GMR", "StartCiv", True)
 
