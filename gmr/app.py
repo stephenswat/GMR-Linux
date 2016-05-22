@@ -14,7 +14,7 @@ def main():
 
 	config.init()
 
-	userAccount = account.Account(config.config.get("GMR", "AuthKey"))
+	userAccount = account.Account(config)
 	filemanager.FileManager.saveDirectory = config.config.get("GMR", "SaveDir")
 
 	print 'Your current games are:'
