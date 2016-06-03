@@ -1,6 +1,7 @@
 import requests
 import gmr_api
 import game
+import time
 
 class Account:
 	"""
@@ -9,14 +10,15 @@ class Account:
 	constantly updated.
 	"""
 
-	def __init__(self, authKey):
+	def __init__(self, config):
 		"""
 		Creates an account object. Takes an authentication key which is used to
 		authenticate the user.
 		"""
 
-		self.authKey = authKey
-		self.playerID = gmr_api.authenticateUser(authKey)
+		self.config = config
+		self.authKey = config.config.get("GMR", "AuthKey")
+		self.playerID = gmr_api.authenticateUser(self.authKey)
 		self.games = []
 
 		if self.playerID == None:
@@ -27,15 +29,20 @@ class Account:
 	def updateAccount(self):
 		"""
 		Updates an account. For now, this only updates the list of games from
-		the GMR API.
+		the GMR API. Only query server once every 15 seconds.
 		"""
+		lastcheck = self.config.config.get("GMR", "LastCheck")
+		elapsed = time.time() - float(lastcheck);
+		if elapsed > 15:
+			response = gmr_api.getGames(self.authKey, self.playerID)
 
-		response = gmr_api.getGames(self.authKey, self.playerID)
+			self.points = response["CurrentTotalPoints"]
+			self.name = response["Players"][0]["PersonaName"]
 
-		self.points = response["CurrentTotalPoints"]
-		self.name = response["Players"][0]["PersonaName"]
-
-		self.updateGames(response["Games"])
+			self.updateGames(response["Games"])
+			self.config.set("LastCheck", time.time())
+		else:
+			print "Last update only " + str(int(elapsed)) + " seconds ago."
 
 	def updateGames(self, games):
 		"""

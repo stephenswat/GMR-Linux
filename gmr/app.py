@@ -3,6 +3,7 @@ import os
 import filemanager
 import config
 import time
+import ui
 
 def main():
 	"""
@@ -13,13 +14,20 @@ def main():
 
 	config.init()
 
-	userAccount = account.Account(config.config.get("GMR", "AuthKey"))
+	userAccount = account.Account(config)
 	filemanager.FileManager.saveDirectory = config.config.get("GMR", "SaveDir")
 
+	print 'Your current games are:'
 	print userAccount.games
+
+	print 'You have turns for these games:'
 	print userAccount.getCurrentTurns()
-	userAccount.getCurrentTurns()[0].playTurn()
-	time.sleep(500)
+
+	for current_turn in userAccount.getCurrentTurns():
+		current_turn.playTurn()
+		# Probably? waits for the file to change before moving turn. Untested.
+
+	print 'Goodbye.'
 
 if __name__ == '__main__':
 	main()

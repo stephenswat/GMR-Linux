@@ -15,3 +15,7 @@ Installation
 ------------
 
 I've aimed to make the installation of this client as simple and portable as possible. To install it, copy the directory anywhere (I would recommend `/opt/gmr-client` or `~/bin/gmr`, but it's up to you). Then, you might want to create a .desktop file or symbolic link as a shortcut to the `gmr-client` script which starts things.
+
+Turn Notifications
+------------
+Since the GMR-API doesn't support push notifications, I suggest that you use email notifications from the GMR website.
